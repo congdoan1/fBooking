@@ -31,13 +31,6 @@
 	</fieldset>
 	<button type="submit">Sign In</button>
 
-<!-- 	<p>Some test user/password pairs you may use are:</p> -->
-<!-- 	<ul> -->
-<!-- 		<li>habuma/freebirds</li> -->
-<!-- 		<li>kdonald/melbourne</li> -->
-<!-- 		<li>rclarkson/atlanta</li> -->
-<!-- 	</ul> -->
-
 	<p>
 		Or you can <a href="<c:url value="/signup"/>">signup</a> with a new
 		account.
@@ -49,8 +42,11 @@
 	action="<c:url value="/signin/facebook"/>" method="POST">
 	<input type="hidden" name="scope"
 		value="publish_stream,user_photos,offline_access" />
-	<button type="submit">
-		<img
-			src="<c:url value="/resources/social/facebook/sign-in-with-facebook.png"/>" />
-	</button>
+		<button type="submit">
+			<img
+				src="<c:url value="/resources/social/facebook/login_fb.png"/>" width="320px" height="25px"/>
+		</button>
+<!-- 	<button class="btn btn-facebook" type="submit"> -->
+<!-- 		<i class="fa fa-facebook"></i> | Connect with Facebook -->
+<!-- 	</button> -->
 </form>

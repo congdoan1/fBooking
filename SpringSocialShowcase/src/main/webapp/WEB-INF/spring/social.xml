@@ -5,15 +5,19 @@
 	xmlns:social="http://www.springframework.org/schema/social"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/social/facebook http://www.springframework.org/schema/social/spring-social-facebook.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/social http://www.springframework.org/schema/social/spring-social.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/social/facebook
+		http://www.springframework.org/schema/social/spring-social-facebook.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/social
+		http://www.springframework.org/schema/social/spring-social.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:property-placeholder location="classpath:/com/spring/social/config/application.properties" />
 
-	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="f-booking" />
+	<facebook:config app-id="${facebook.clientId}" app-secret="${facebook.clientSecret}" app-namespace="${facebook.appNamespace}" />
 
 	<social:jdbc-connection-repository/>	
 	<bean id="userIdSource" class="org.springframework.social.security.AuthenticationNameUserIdSource" />
