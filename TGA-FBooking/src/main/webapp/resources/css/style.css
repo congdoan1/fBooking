@@ -21,8 +21,8 @@ body {
 	bottom: -40px;
 	width: auto;
 	height: auto;
-	background-image: url("../images/body-background.jpg");
-	background-size: auto;
+	background-image: url("../images/bgr.jpg");
+	background-size: cover;
 	-webkit-filter: blur(0px);
 	-moz-filter: blur(5px);
 	-o-filter: blur(5px);
@@ -51,12 +51,18 @@ body {
 	font-weight: bold;
 }
 
+.label {
+	padding: 14px;
+	font-size: 16px;
+	color: blue;
+}
+
 .box {
 	position: absolute;
 	border-radius: 20px;
-	top: calc(40% - 75px);
+	top: calc(25% - 75px);
 	left: calc(50% - 50px);
-	height: 300px;
+	height: 500px;
 	width: 300px;
 	padding: 10px;
 	z-index: 2;
@@ -106,20 +112,17 @@ body {
 #login {
 	background: #2ecc71;
 	background: rgba(46, 204, 113, 0.75);
-/* 	border: 0; */
-/* 	border-radius: 15px; */
-/* 	color: #fff; */
-/* 	padding: 10px; */
-/* 	font-size: 20px; */
-/* 	width: 280px; */
-/* 	display: inline; */
-/* 	cursor: pointer; */
-/* 	margin: 10px; */
 }
 
 #facebook {
 	background: #2C48FF;
 	background: rgba(44, 72, 255, 0.75);
+}
+
+#register {
+	background: #E93926;
+	background: rgba(233, 57, 38, 0.75);
+	outline: 0;
 }
 
 .box button:active {
@@ -163,4 +166,70 @@ hr {
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+
+.box1 {
+	position: absolute;
+	border-radius: 20px;
+	top: calc(40% - 75px);
+	left: calc(50% - 50px);
+	height: 300px;
+	width: 300px;
+	padding: 10px;
+	z-index: 2;
+	background: rgb(255, 255, 255);
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.box1 input[type=text] {
+	display: block;
+	border-radius: 15px;
+	width: 250px;
+	margin: 10px;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	border: 0;
+}
+
+.box1 input[type=password] {
+	display: block;
+	border-radius: 15px;
+	width: 250px;
+	margin: 10px;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.2);
+	color: #fff;
+	border: 0;
+}
+
+.box1 input:focus, .box input:active, .box button:focus, .box button:active
+	{
+	outline: none;
+}
+
+.box1 input[type=submit] {
+	border: 0;
+	border-radius: 15px;
+	color: #fff;
+	padding: 10px;
+	font-size: 20px;
+	width: 280px;
+	display: inline;
+	cursor: pointer;
+	margin: 10px;
+}
+
+.box1 button:active {
+	background: #27ae60;
+}
+
+.box1 p {
+	font-size: 14px;
+	text-align: center;
+}
+
+.box1 p span {
+	cursor: pointer;
+	color: #666;
 }

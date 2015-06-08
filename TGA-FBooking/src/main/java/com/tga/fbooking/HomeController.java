@@ -1,7 +1,9 @@
 package com.tga.fbooking;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,21 +27,25 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home() {
+		return "home";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("username")String username,
-			@RequestParam("password")String password, Model model) {
+			@RequestParam("password")String password, HttpSession session) {
 		UserDTO dto = UserDAO.checkLogin(username, password);
 		if (dto != null) {
-			model.addAttribute("user", dto.getUsername());
-			return "home";
+			session.setAttribute("user", dto.getUsername());
+			return "redirect:/home";
 		}
-		//model.addAttribute("invalid", "Invalid username or password!!!");
+		session.setAttribute("invalid", "Invalid username or password!!!");
 		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/login/facebook", method = RequestMethod.GET)
-	public String login(@RequestParam("code")String code, Model model) {
-		
+	public String login(@RequestParam("code")String code, HttpSession session) {
 		//Tu code da lay, chuyen thanh access token
 		APIWrapper wrapper = new APIWrapper();
 		String accessToken = wrapper.getAccessToken(code);
@@ -51,13 +57,40 @@ public class HomeController {
 		
 		//User chua ton tai trong db thi dang ki
 		if (!userExist) {
-			UserDAO.register(dto.getUsername(), dto.getFirstName(), 
-					dto.getLastName(), dto.getFacebookId().trim(), dto.getFacebookUrl());
+			session.setAttribute("user", dto);
+			return "register";
 		}
 		
 		//Dua thong tin cao session de login vao
-		model.addAttribute("user", dto);
+		session.setAttribute("user", UserDAO.checkLogin(dto.getFacebookId()).getUsername());
 		return "home";
 	}
+	
+	@RequestMapping(value = "/login/register", method = RequestMethod.POST)
+	public String register(@ModelAttribute("username") String username,
+			@ModelAttribute("password") String password,
+			@ModelAttribute("firstname") String firstname,
+			@ModelAttribute("lastname") String lastname,
+			@ModelAttribute("facebookId") String facebookId,
+			@ModelAttribute("facebookUrl") String facebookUrl, HttpSession session) {
+
+		if (UserDAO.checkExisted(username)) {
+			session.setAttribute("duplicate", "This username is already in use.");
+			return "redirect:/register";
+		}
+
+		UserDAO.register(username, password, firstname.trim(), lastname.trim(),
+				facebookId, facebookUrl);
+
+		// Dua thong tin cao session de ve trang home
+		session.setAttribute("user", username);
+		return "home";
+	}
+	
+	@RequestMapping(value = "/logout")
+    public String logout(HttpSession session) {
+       session.invalidate();
+       return "redirect:/";
+    }
 	
 }

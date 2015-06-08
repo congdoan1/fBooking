@@ -6,13 +6,38 @@ public class UserDTO {
 	
 	@SerializedName(value = "userId")
 	private String id;
+	
 	@SerializedName(value = "id")
 	private String facebookId;
+	
+	@SerializedName(value = "first_name")
 	private String firstName;
+	
+	@SerializedName(value = "last_name")
 	private String lastName;
+	
 	private String username;
+	
+	@SerializedName(value = "link")
 	private String facebookUrl;
 	
+	public UserDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public UserDTO(String id, String facebookId, String firstName,
+			String lastName, String username, String facebookUrl) {
+		super();
+		this.id = id;
+		this.facebookId = facebookId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.facebookUrl = facebookUrl;
+	}
+
+
+
 	public String getFacebookId() {
 		return facebookId;
 	}

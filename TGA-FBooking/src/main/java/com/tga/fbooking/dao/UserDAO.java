@@ -91,20 +91,55 @@ public class UserDAO implements Serializable {
 		return null;
 	}
 	
-	public static boolean register(String username, String firstName, String lastName,
+	public static boolean checkExisted(String username) {
+		PreparedStatement stm = null;
+		ResultSet rs = null;
+		Connection con = null;
+		try {
+			con = DBUtils.makeConnection();
+			String sql = "select 1 from user where username=?";
+			stm = con.prepareStatement(sql);
+			stm.setString(1, username);
+			rs = stm.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (stm != null) {
+					stm.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException ex) {
+				ex.printStackTrace();
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean register(String username, String password, String firstName, String lastName,
 			String facebookId, String facebookUrl) {
 		PreparedStatement stm = null;
 		Connection con = null;
 		try {
 			con = DBUtils.makeConnection();
-			String sql = "insert into user(username, firstName, lastName, facebookId, facebookUrl) "
-					+ "values(?,?,?,?,?)";
+			String sql = "insert into user(username, password, firstName, lastName, facebookId, facebookUrl) "
+					+ "values(?,?,?,?,?,?)";
 			stm = con.prepareStatement(sql);
 			stm.setString(1, username);
-			stm.setString(2, firstName);
-			stm.setString(3, lastName);
-			stm.setString(4, facebookId);
-			stm.setString(5, facebookUrl);
+			stm.setString(2, password);
+			stm.setString(3, firstName);
+			stm.setString(4, lastName);
+			stm.setString(5, facebookId);
+			stm.setString(6, facebookUrl);
 			int row = stm.executeUpdate();
 			if (row > 0) {
 				return true;

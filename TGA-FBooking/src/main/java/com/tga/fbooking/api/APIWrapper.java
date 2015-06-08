@@ -8,7 +8,7 @@ public class APIWrapper {
 	
 	private static String appID = "438701402972639";
 	private static String appSecret = "2f46ee65ec84e8ad708cb095d718a8c5";
-	private static String redirectUrl = "http://localhost:3036/fbooking/login/facebook";
+	private static String redirectUrl = "http://localhost:8080/fbooking/login/facebook";
 	private String accessToken;
 	private Gson gson;
 	
