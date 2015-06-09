@@ -1,0 +1,176 @@
+@import url('demo.css');
+@import url('common.css');
+@import url('icons.css');
+ .cd-dropdown ul {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+.cd-dropdown > span,
+.cd-dropdown ul li {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.cd-dropdown ul li {
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+}
+.cd-active.cd-dropdown > span {
+    color: #c29ad2;
+}
+.cd-active.cd-dropdown ul li {
+    pointer-events: auto;
+}
+.cd-active.cd-dropdown ul li span {
+    -webkit-transition: all 0.2s linear 0s;
+    -moz-transition: all 0.2s linear 0s;
+    -ms-transition: all 0.2s linear 0s;
+    -o-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+}
+.cd-active.cd-dropdown ul li span:hover {
+    background: #c29ad2;
+    color: #fff;
+}
+.topcorner {
+    position: absolute;
+    top: 30px;
+    left: 0;
+}
+.transbox {
+    position: absolute;
+    border-radius: 20px;
+	top: calc(100% - -70px);
+	left: calc(12% - 20px);
+	height: 500px;
+	width: 1000px;
+    background-color: #fff;
+    border: 1px solid white;
+    opacity: 0.7;
+    filter: alpha(opacity=50);
+}
+
+.transbox1 {
+    position: absolute;
+    border-radius: 20px;
+	top: calc(100% - -10px);
+	left: calc(12% - 20px);
+	height: 500px;
+	width: 1000px;
+    background-color: #fff;
+    border: 1px solid white;
+    opacity: 0.7;
+    filter: alpha(opacity=50);
+}
+.dropdown {
+    display: inline-block;
+    position: absolute;
+    overflow: hidden;
+    height: 40px;
+    width: 200px;
+    background: #f2f2f2;
+    border: 1px solid;
+    border-color: white #f7f7f7 #f5f5f5;
+    border-radius: 3px;
+    @include linear-gradient(top, transparent, rgba(black, .03));
+    @include box-shadow(0 1px 1px rgba(black, .08));
+    &: before, &: after {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        top: 9px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 4px dashed;
+        border-color: #888 transparent;
+        pointer-events: none;
+    }
+    &:before {
+        border-bottom-style: solid;
+        border-top: none;
+    }
+    &:after {
+        margin-top: 7px;
+        border-top-style: solid;
+        border-bottom: none;
+    }
+}
+.dropdown-select {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 6px 8px 6px 10px;
+    height: 40px;
+    line-height: 14px;
+    font-size: 12px;
+    color: #62717a;
+    text-shadow: 0 1px white;
+    /* Fallback for IE 8 */
+    background: #f2f2f2;
+    /* "transparent" doesn't work with Opera */
+    background: rgba(black, 0) !important;
+    border: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    &: focus {
+        z-index: 3;
+        width: 100%;
+        color: #394349;
+        outline: 2px solid #49aff2;
+        outline: 2px solid -webkit-focus-ring-color;
+        outline-offset: -2px;
+    }
+    > option {
+        margin: 3px;
+        padding: 6px 8px;
+        text-shadow: none;
+        background: #f2f2f2;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+}
+/* Fix for IE 8 putting the arrows behind the select element. */
+
+.lt-ie9 {
+    .dropdown {
+        z-index: 1;
+    }
+    .dropdown-select {
+        z-index: -1;
+    }
+    .dropdown-select:focus {
+        z-index: 3;
+    }
+}
+/* Dirty fix for Firefox adding padding where it shouldn't. */
+
+@-moz-document url-prefix() {
+    .dropdown-select {
+        padding-left: 6px;
+    }
+}
+.dropdown-dark {
+    background: #444;
+    border-color: #111 #0a0a0a black;
+    @include linear-gradient(top, transparent, rgba(black, .4));
+    @include box-shadow(inset 0 1px rgba(white, .1), 0 1px 1px rgba(black, .2));
+    &: before {
+        border-bottom-color: #aaa;
+    }
+    &:after {
+        border-top-color: #aaa;
+    }
+    .dropdown-select {
+        color: #aaa;
+        text-shadow: 0 1px black;
+        /* Fallback for IE 8 */
+        background: #444;
+        &: focus {
+            color: #ccc;
+        }
+        > option {
+            background: #444;
+            text-shadow: 0 1px rgba(black, .4);
+        }
+    }

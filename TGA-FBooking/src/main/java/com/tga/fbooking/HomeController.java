@@ -1,5 +1,6 @@
 package com.tga.fbooking;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,11 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginBack() {
+		return "login";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("username")String username,
 			@RequestParam("password")String password, HttpSession session) {
@@ -41,11 +47,15 @@ public class HomeController {
 			return "redirect:/home";
 		}
 		session.setAttribute("invalid", "Invalid username or password!!!");
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping(value = "/login/facebook", method = RequestMethod.GET)
-	public String login(@RequestParam("code")String code, HttpSession session) {
+	public String loginFB(HttpServletRequest request, HttpSession session) {
+		String code = request.getParameter("code");
+		if (code == null) {
+			return "redirect:/";
+		}
 		//Tu code da lay, chuyen thanh access token
 		APIWrapper wrapper = new APIWrapper();
 		String accessToken = wrapper.getAccessToken(code);

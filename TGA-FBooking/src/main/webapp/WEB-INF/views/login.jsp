@@ -1,6 +1,6 @@
 <%@page import="com.tga.fbooking.api.APIWrapper"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,9 +20,15 @@
 	<br>
 	
 	<div class="box1">
-		<form action="login" method="post" lang="en">
+		<form action="login" method="post">
+			<c:set var="error" value="${sessionScope.invalid}" />
 			<input type="text" placeholder="username" name="username" pattern=".{6,}" required title="6 characters minimum"><br>
-			<input type="password" placeholder="password" name="password" required><br>
+			<input type="password" placeholder="password" name="password" required>
+			<div>
+				<c:if test="${not empty error}">
+					<label id="label">${error}</label>
+				</c:if>
+			</div>
 			<div>
 				<input id="login" type="submit" value="Login">
 			</div>
@@ -36,5 +42,10 @@
 			</a>
 		</div>
 	</div>
+<!-- 	<div> -->
+<%-- 		<c:if test="${not empty error}"> --%>
+<%-- 			<span>${error}</span> --%>
+<%-- 		</c:if> --%>
+<!-- 	</div> -->
 </body>
 </html>

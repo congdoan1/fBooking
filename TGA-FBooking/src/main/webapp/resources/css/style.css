@@ -57,6 +57,12 @@ body {
 	color: blue;
 }
 
+#label {
+	padding: 14px;
+	font-size: 15px;
+	color: red;
+}
+
 .box {
 	position: absolute;
 	border-radius: 20px;
